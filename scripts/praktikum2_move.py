@@ -36,11 +36,27 @@ def move():
         ########################
         # YOUR CODE HERE START #
         ########################
-        vel_msg.linear.x = 0
-        vel_msg.linear.y = 0
-        vel_msg.angular.z = 0
-        velocity_publisher.publish(vel_msg)
-        rospy.sleep(0.1)
+        for j in range(0,4):
+            for i in range(0,15):
+                vel_msg.linear.x = 0.6
+                vel_msg.angular.z = 0
+                vel_msg.linear.y = 0
+                velocity_publisher.publish(vel_msg)
+                rospy.sleep(0.1)
+            for i in range(0,10):
+                vel_msg.linear.x = 0
+                vel_msg.angular.z = 0
+                vel_msg.linear.y = 0
+                velocity_publisher.publish(vel_msg)
+                rospy.sleep(0.1)
+            for i in range(0,30):
+                vel_msg.linear.x = 0
+                vel_msg.angular.z = 0.60
+                vel_msg.linear.y = 0
+                velocity_publisher.publish(vel_msg)
+                rospy.sleep(0.1)
+
+            rospy.sleep(0.1)
         ######################
         # YOUR CODE HERE END #
         ######################

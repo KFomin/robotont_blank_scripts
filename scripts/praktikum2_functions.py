@@ -22,6 +22,57 @@ def closing():
 #######################
 # YOUR FUNCTIONS HERE #
 #######################
+def tagamov(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x =-b
+        vel_msg.angular.z = 0
+        vel_msg.linear.y = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+
+def otsemov(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x = b
+        vel_msg.angular.z = 0
+        vel_msg.linear.y = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+def poormovparem(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x = 0
+        vel_msg.angular.z = -b
+        vel_msg.linear.y = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+
+def poormovvasak(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x = 0
+        vel_msg.angular.z = b
+        vel_msg.linear.y = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+def pausemov(a):
+    for i in range(0,a):
+        vel_msg.linear.x = 0
+        vel_msg.angular.z = 0
+        vel_msg.linear.y = 0
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+def rightmov(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x = 0
+        vel_msg.angular.z = 0
+        vel_msg.linear.y = b
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+def leftmov(a,b):
+    for i in range(0,a):
+        vel_msg.linear.x = 0
+        vel_msg.angular.z = 0
+        vel_msg.linear.y = -b
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
 
 
 ###########################
@@ -44,11 +95,12 @@ def move():
         ########################
         # YOUR CODE HERE START #
         ########################
-        vel_msg.linear.x = 0
-        vel_msg.linear.y = 0
-        vel_msg.angular.z = 0
-        velocity_publisher.publish(vel_msg)
-        rospy.sleep(0.1)
+        otsemov(15,0.2)
+        poormovvasak(30,0.6)
+        pausemov(30)
+        otsemov(30,0.2)
+        poormovparem(30,0.6)
+        pausemov(15)
         ######################
         # YOUR CODE HERE END #
         ######################
