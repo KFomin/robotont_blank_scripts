@@ -19,8 +19,26 @@ MAX_Z_SPEED = 2
 # TASK 1
 
 
-def keep_distance(x, y, z, roll, pitch, yaw, twist):
-
+def spinR(x, y, z, roll, pitch, yaw, twist):
+    twist.angular.z = 1
+    return twist
+def spinL(x, y, z, roll, pitch, yaw, twist):
+    twist.angular.z = -1
+    return twist
+def stay(x, y, z, roll, pitch, yaw, twist):
+    twist.angular.z = 0
+    twist.linear.x = 0
+    twist.linear.y = 0
+    return twist
+def back(x, y, z, roll, pitch, yaw, twist):
+    twist.angular.z = 0
+    twist.linear.x = -0.3
+    twist.linear.y = 0
+    return twist
+def forward(x, y, z, roll, pitch, yaw, twist):
+    twist.angular.z = 0
+    twist.linear.x = 0.3
+    twist.linear.y = 0
     return twist
 
 # TASK 2
@@ -94,6 +112,20 @@ def ar_demo():
         yaw = euler[2]
         rospy.loginfo("RPY: %s %s %s", roll, pitch, yaw)
         # YOUR CODE HERE
+        if marker.id == 9:
+            global cmd_vel_pub
+            last_heartbeat = rospy.get_time()
+            twist_msg = spinR(x, y, z, roll, pitch, yaw, twist_msg)
+            # limiting
+        elif marker.id == 3:
+            global cmd_vel_pub
+            last_heartbeat = rospy.get_time()
+            twist_msg = spinL(x, y, z, roll, pitch, yaw, twist_msg)
+        elif marker.id == 8:
+            last_heartbeat = rospy.get_time()
+            twist_msg = forward(x, y, z, roll, pitch, yaw, twist_msg)
+        else:
+            pass
 
         # YOUR CODE HERE END
         # limiting
